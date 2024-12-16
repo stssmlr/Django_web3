@@ -1,11 +1,12 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . import forms
+from .models import Post
 
 # Create your views here.
 def news_list(request):
-    return render(request, "news_list.html")
-
+    posts = Post.objects.all()
+    return render(request, "news_list.html", {'posts': posts})
 # Створення нового посту
 @login_required
 def post_create(request):
